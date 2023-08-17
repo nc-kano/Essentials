@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 using System.Threading.Tasks;
 using Android.Content;
@@ -136,7 +137,9 @@ namespace Xamarin.Essentials
         internal static string Md5Hash(string input)
         {
             var hash = new StringBuilder();
+#pragma warning disable SYSLIB0021
             var md5provider = new System.Security.Cryptography.MD5CryptoServiceProvider();
+#pragma warning restore SYSLIB0021
             var bytes = md5provider.ComputeHash(Encoding.UTF8.GetBytes(input));
 
             for (var i = 0; i < bytes.Length; i++)
@@ -146,6 +149,7 @@ namespace Xamarin.Essentials
         }
     }
 
+    [SuppressMessage("Interoperability", "CA1422:Validate platform compatibility", Justification = "Interoperability")]
     class AndroidKeyStore
     {
         const string androidKeyStore = "AndroidKeyStore"; // this is an Android const value

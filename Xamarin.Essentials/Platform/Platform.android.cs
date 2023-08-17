@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Concurrent;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using System.Threading.Tasks;
 using Android.App;
@@ -17,6 +18,7 @@ using AndroidUri = Android.Net.Uri;
 
 namespace Xamarin.Essentials
 {
+    [SuppressMessage("Interoperability", "CA1422:Validate platform compatibility", Justification = "Interoperability")]
     public static partial class Platform
     {
         static ActivityLifecycleContextListener lifecycleListener;
@@ -335,6 +337,7 @@ namespace Xamarin.Essentials
     }
 
     [Activity(ConfigurationChanges = ConfigChanges.Orientation | ConfigChanges.ScreenSize)]
+    [SuppressMessage("Interoperability", "CA1422:Validate platform compatibility", Justification = "Interoperability")]
     class IntermediateActivity : Activity
     {
         const string launchedExtra = "launched";

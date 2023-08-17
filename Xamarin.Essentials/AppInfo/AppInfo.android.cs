@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
 using Android.Content;
 using Android.Content.PM;
 using Android.Content.Res;
@@ -11,6 +12,7 @@ using Android.Support.V4.Content.PM;
 
 namespace Xamarin.Essentials
 {
+    [SuppressMessage("Interoperability", "CA1422:Walidacja zgodności z platformą", Justification = "Interoperability")]
     public static partial class AppInfo
     {
         static string PlatformGetPackageName() => Platform.AppContext.PackageName;
@@ -27,7 +29,9 @@ namespace Xamarin.Essentials
             var pm = Platform.AppContext.PackageManager;
             var packageName = Platform.AppContext.PackageName;
 #pragma warning disable CS0618 // Type or member is obsolete
+#pragma warning disable CA1422
             using (var info = pm.GetPackageInfo(packageName, PackageInfoFlags.MetaData))
+#pragma warning restore CA1422
 #pragma warning restore CS0618 // Type or member is obsolete
             {
                 return info.VersionName;

@@ -2,7 +2,7 @@
 
 var TARGET = Argument("t", Argument("target", "ci"));
 
-var NUGET_VERSION = EnvironmentVariable("NUGET_VERSION") ?? "1.0.0";
+var NUGET_VERSION = EnvironmentVariable("NUGET_VERSION") ?? "3.0.0";
 var GIT_SHA = Argument("gitSha", EnvironmentVariable("GIT_SHA") ?? "");
 var GIT_BRANCH_NAME = Argument("gitBranch", EnvironmentVariable("GIT_BRANCH_NAME") ?? "");
 

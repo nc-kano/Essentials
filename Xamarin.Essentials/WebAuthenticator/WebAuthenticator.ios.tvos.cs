@@ -76,7 +76,8 @@ namespace Xamarin.Essentials
 
                 if (UIDevice.CurrentDevice.CheckSystemVersion(13, 0))
                 {
-                    var ctx = new ContextProvider(Platform.GetCurrentWindow());
+                    var window = Platform.GetCurrentWindow();
+                    var ctx = new ContextProvider(window);
                     void_objc_msgSend_IntPtr(was.Handle, ObjCRuntime.Selector.GetHandle("setPresentationContextProvider:"), ctx.Handle);
                     was.PrefersEphemeralWebBrowserSession = prefersEphemeralWebBrowserSession;
                 }
@@ -85,10 +86,18 @@ namespace Xamarin.Essentials
                     ClearCookies();
                 }
 
+                ClearCookies();
+
                 using (was)
                 {
                     was.Start();
-                    return await tcsResponse.Task;
+                    var result = await tcsResponse.Task;
+                    if (scheme == "https")
+                    {
+                        was?.Cancel();
+                    }
+                    was = null;
+                    return result;
                 }
             }
 

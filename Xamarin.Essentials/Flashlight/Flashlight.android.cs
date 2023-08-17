@@ -1,20 +1,20 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using Android.Content.PM;
 using Android.Graphics;
 using Android.Hardware.Camera2;
 using Android.OS;
 
-using Camera = Android.Hardware.Camera;
-
 namespace Xamarin.Essentials
 {
+    [SuppressMessage("Interoperability", "CA1422:Validate platform compatibility", Justification = "Interoperability")]
     public static partial class Flashlight
     {
         static readonly object locker = new object();
 
 #pragma warning disable CS0618
-        static Camera camera;
+        static global::Android.Hardware.Camera camera;
 #pragma warning restore CS0618
         static SurfaceTexture surface;
 
@@ -79,7 +79,7 @@ namespace Xamarin.Essentials
                                 surface = new SurfaceTexture(0);
 
 #pragma warning disable CS0618 // Camera types are deprecated in Android 10+
-                            camera = Camera.Open();
+                            camera = global::Android.Hardware.Camera.Open();
 
                             // Nexus 5 and some devices require a preview texture
                             camera.SetPreviewTexture(surface);
@@ -88,7 +88,7 @@ namespace Xamarin.Essentials
                         var param = camera.GetParameters();
 
                         // Deprecated in an earlier android version
-                        param.FlashMode = switchOn ? Camera.Parameters.FlashModeTorch : Camera.Parameters.FlashModeOff;
+                        param.FlashMode = switchOn ? global::Android.Hardware.Camera.Parameters.FlashModeTorch : global::Android.Hardware.Camera.Parameters.FlashModeOff;
 
                         camera.SetParameters(param);
 

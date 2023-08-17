@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using CoreLocation;
 using Foundation;
 
 namespace Xamarin.Essentials
 {
+    [SuppressMessage("Interoperability", "CA1422:Validate platform compatibility", Justification = "Interoperability")]
     public static partial class LocationExtensions
     {
         [System.Runtime.InteropServices.DllImport(ObjCRuntime.Constants.ObjectiveCLibrary, EntryPoint = "objc_msgSend")]
@@ -69,7 +71,9 @@ namespace Xamarin.Essentials
                 return CLAuthorizationStatus_objc_msgSend(locationManager.Handle, sel);
             }
 
+#pragma warning disable CA1416
             return CLLocationManager.Status;
+#pragma warning restore CA1416
         }
     }
 }

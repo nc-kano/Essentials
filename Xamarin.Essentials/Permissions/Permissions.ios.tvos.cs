@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using Photos;
 
 namespace Xamarin.Essentials
 {
+    [SuppressMessage("Interoperability", "CA1422:Validate platform compatibility", Justification = "Interoperability")]
     public static partial class Permissions
     {
+        [SuppressMessage("Interoperability", "CA1416:Validate platform compatibility", Justification = "Interoperability")]
         public partial class Photos : BasePlatformPermission
         {
             protected override Func<IEnumerable<string>> RequiredInfoPlistKeys => () =>

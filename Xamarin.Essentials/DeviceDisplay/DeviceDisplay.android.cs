@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using Android.Content;
 using Android.Content.Res;
@@ -10,6 +11,7 @@ using Android.Views;
 
 namespace Xamarin.Essentials
 {
+    [SuppressMessage("Interoperability", "CA1422:Validate platform compatibility", Justification = "Interoperability")]
     public static partial class DeviceDisplay
     {
         static OrientationEventListener orientationListener;

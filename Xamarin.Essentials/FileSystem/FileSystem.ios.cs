@@ -215,8 +215,10 @@ namespace Xamarin.Essentials
         {
             var tcsStream = new TaskCompletionSource<Stream>();
 
+#pragma warning disable CA1422
             PHImageManager.DefaultManager.RequestImageData(phAsset, null, new PHImageDataHandler((data, str, orientation, dict) =>
                 tcsStream.TrySetResult(data.AsStream())));
+#pragma warning restore CA1422
 
             return tcsStream.Task;
         }

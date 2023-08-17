@@ -14,7 +14,9 @@ namespace Xamarin.Essentials
             {
                 case BrowserLaunchMode.SystemPreferred:
                     var nativeUrl = new NSUrl(uri.AbsoluteUri);
+#pragma warning disable CA1422
                     var sfViewController = new SFSafariViewController(nativeUrl, false);
+#pragma warning restore CA1422
                     var vc = Platform.GetCurrentViewController();
 
                     if (options.PreferredToolbarColor.HasValue)

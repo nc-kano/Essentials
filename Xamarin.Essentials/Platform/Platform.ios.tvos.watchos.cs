@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
@@ -15,6 +16,8 @@ using UIDevice = WatchKit.WKInterfaceDevice;
 
 namespace Xamarin.Essentials
 {
+    [SuppressMessage("Interoperability", "CA1422:Validate platform compatibility", Justification = "Interoperability")]
+    [SuppressMessage("Interoperability", "CA1416:Walidacja zgodności z platformą", Justification = "Interoperability")]
     public static partial class Platform
     {
 #if __IOS__ || __TVOS__
@@ -117,15 +120,19 @@ namespace Xamarin.Essentials
 
         internal static UIWindow GetCurrentWindow(bool throwIfNull = true)
         {
+#pragma warning disable CA1422
             var window = UIApplication.SharedApplication.KeyWindow;
+#pragma warning restore CA1422
 
             if (window != null && window.WindowLevel == UIWindowLevel.Normal)
                 return window;
 
             if (window == null)
             {
+#pragma warning disable CA1422
                 window = UIApplication.SharedApplication
                     .Windows
+#pragma warning restore CA1422
                     .OrderByDescending(w => w.WindowLevel)
                     .FirstOrDefault(w => w.RootViewController != null && w.WindowLevel == UIWindowLevel.Normal);
             }

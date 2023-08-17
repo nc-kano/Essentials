@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using Android.Content;
 using Android.OS;
@@ -9,6 +10,7 @@ using Uri = Android.Net.Uri;
 
 namespace Xamarin.Essentials
 {
+    [SuppressMessage("Interoperability", "CA1422:Validate platform compatibility", Justification = "Interoperability")]
     public static partial class Email
     {
         static readonly EmailMessage testEmail =

@@ -23,7 +23,9 @@ namespace Xamarin.Essentials
             // read the values
             launched = extras?.GetBoolean(launchedExtra, false) ?? false;
 #pragma warning disable CS0618 // Type or member is obsolete
+#pragma warning disable CA1422
             actualIntent = extras?.GetParcelable(actualIntentExtra) as Intent;
+#pragma warning restore CA1422
 #pragma warning restore CS0618 // Type or member is obsolete
         }
 

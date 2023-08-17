@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Threading.Tasks;
 using Foundation;
@@ -40,6 +41,7 @@ namespace Xamarin.Essentials
         }
     }
 
+    [SuppressMessage("Interoperability", "CA1416:Walidacja zgodności z platformą", Justification = "Interoperability")]
     public partial class FileBase
     {
         internal FileBase(NSUrl file)
@@ -53,8 +55,14 @@ namespace Xamarin.Essentials
             // ios does not like the extensions
             extension = extension?.TrimStart('.');
 
+#pragma warning disable CA1422
             var id = UTType.CreatePreferredIdentifier(UTType.TagClassFilenameExtension, extension, null);
+#pragma warning restore CA1422
+#pragma warning disable CA1422
+#pragma warning disable BI1234
             var mimeTypes = UTType.CopyAllTags(id, UTType.TagClassMIMEType);
+#pragma warning restore BI1234
+#pragma warning restore CA1422
             return mimeTypes?.Length > 0 ? mimeTypes[0] : null;
         }
 

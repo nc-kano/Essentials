@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Threading.Tasks;
 using Android.Provider;
@@ -8,6 +9,7 @@ using AndroidUri = Android.Net.Uri;
 
 namespace Xamarin.Essentials
 {
+    [SuppressMessage("Interoperability", "CA1422:Validate platform compatibility", Justification = "Interoperability")]
     public partial class FileSystem
     {
         internal const string EssentialsFolderHash = "2203693cc04e0be7f4f024d5f9499e13";

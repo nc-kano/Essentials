@@ -19,7 +19,9 @@ namespace Xamarin.Essentials
         internal static Task<bool> PlatformOpenAsync(NSUrl nativeUrl) =>
             Platform.HasOSVersion(10, 0)
                 ? UIApplication.SharedApplication.OpenUrlAsync(nativeUrl, new UIApplicationOpenUrlOptions())
+#pragma warning disable CA1422
                 : Task.FromResult(UIApplication.SharedApplication.OpenUrl(nativeUrl));
+#pragma warning restore CA1422
 
         static Task<bool> PlatformTryOpenAsync(Uri uri)
         {

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using Android.App;
 using Android.Content;
@@ -6,6 +7,7 @@ using Android.Preferences;
 
 namespace Xamarin.Essentials
 {
+    [SuppressMessage("Interoperability", "CA1422:Validate platform compatibility", Justification = "Interoperability")]
     public static partial class Preferences
     {
         static readonly object locker = new object();

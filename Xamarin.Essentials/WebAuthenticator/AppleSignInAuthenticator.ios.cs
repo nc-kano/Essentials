@@ -62,7 +62,9 @@ namespace Xamarin.Essentials
     class AuthManager : NSObject, IASAuthorizationControllerDelegate, IASAuthorizationControllerPresentationContextProviding
     {
         public Task<ASAuthorizationAppleIdCredential> GetCredentialsAsync()
+#pragma warning disable CA1416
             => tcsCredential?.Task;
+#pragma warning restore CA1416
 
         TaskCompletionSource<ASAuthorizationAppleIdCredential> tcsCredential;
 
@@ -70,7 +72,9 @@ namespace Xamarin.Essentials
 
         public AuthManager(UIWindow presentingWindow)
         {
+#pragma warning disable CA1416
             tcsCredential = new TaskCompletionSource<ASAuthorizationAppleIdCredential>();
+#pragma warning restore CA1416
             presentingAnchor = presentingWindow;
         }
 
@@ -80,7 +84,9 @@ namespace Xamarin.Essentials
         [Export("authorizationController:didCompleteWithAuthorization:")]
         public void DidComplete(ASAuthorizationController controller, ASAuthorization authorization)
         {
+#pragma warning disable CA1416
             var creds = authorization.GetCredential<ASAuthorizationAppleIdCredential>();
+#pragma warning restore CA1416
             tcsCredential?.TrySetResult(creds);
         }
 

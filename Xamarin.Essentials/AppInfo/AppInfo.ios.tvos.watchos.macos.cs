@@ -50,13 +50,21 @@ namespace Xamarin.Essentials
             if (!Platform.HasOSVersion(13, 0))
                 return AppTheme.Unspecified;
 
+#pragma warning disable CA1416
             var uiStyle = Platform.GetCurrentUIViewController()?.TraitCollection?.UserInterfaceStyle ??
-                UITraitCollection.CurrentTraitCollection.UserInterfaceStyle;
+#pragma warning restore CA1416
+#pragma warning disable CA1416
+                          UITraitCollection.CurrentTraitCollection.UserInterfaceStyle;
+#pragma warning restore CA1416
 
             return uiStyle switch
             {
+#pragma warning disable CA1416
                 UIUserInterfaceStyle.Light => AppTheme.Light,
+#pragma warning restore CA1416
+#pragma warning disable CA1416
                 UIUserInterfaceStyle.Dark => AppTheme.Dark,
+#pragma warning restore CA1416
                 _ => AppTheme.Unspecified
             };
         }

@@ -9,9 +9,13 @@ namespace Xamarin.Essentials
     public static partial class Connectivity
     {
 #if __IOS__
+#pragma warning disable CA1416
         static readonly Lazy<CTCellularData> cellularData = new Lazy<CTCellularData>(() => new CTCellularData());
+#pragma warning restore CA1416
 
+#pragma warning disable CA1416
         internal static CTCellularData CellularData => cellularData.Value;
+#pragma warning restore CA1416
 #endif
 
         static ReachabilityListener listener;
@@ -38,7 +42,9 @@ namespace Xamarin.Essentials
             {
                 var restricted = false;
 #if __IOS__
+#pragma warning disable CA1416
                 restricted = CellularData.RestrictedState == CTCellularDataRestrictedState.Restricted;
+#pragma warning restore CA1416
 #endif
                 var internetStatus = Reachability.InternetConnectionStatus();
                 if ((internetStatus == NetworkStatus.ReachableViaCarrierDataNetwork && !restricted) || internetStatus == NetworkStatus.ReachableViaWiFiNetwork)

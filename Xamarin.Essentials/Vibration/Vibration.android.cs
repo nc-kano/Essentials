@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 #if __ANDROID_26__
 using Android;
 using Android.OS;
@@ -6,6 +7,7 @@ using Android.OS;
 
 namespace Xamarin.Essentials
 {
+    [SuppressMessage("Interoperability", "CA1422:Validate platform compatibility", Justification = "Interoperability")]
     public static partial class Vibration
     {
         internal static bool IsSupported => true;

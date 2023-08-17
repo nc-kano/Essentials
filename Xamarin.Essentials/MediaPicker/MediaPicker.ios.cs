@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
 using Foundation;
@@ -8,6 +9,8 @@ using UIKit;
 
 namespace Xamarin.Essentials
 {
+    [SuppressMessage("Interoperability", "CA1422:Validate platform compatibility", Justification = "Interoperability")]
+    [SuppressMessage("Interoperability", "CA1416:Walidacja zgodności z platformą", Justification = "Interoperability")]
     public static partial class MediaPicker
     {
         static UIImagePickerController picker;
@@ -29,8 +32,12 @@ namespace Xamarin.Essentials
 
         static async Task<FileResult> PhotoAsync(MediaPickerOptions options, bool photo, bool pickExisting)
         {
+#pragma warning disable CA1422
             var sourceType = pickExisting ? UIImagePickerControllerSourceType.PhotoLibrary : UIImagePickerControllerSourceType.Camera;
+#pragma warning restore CA1422
+#pragma warning disable CA1422
             var mediaType = photo ? UTType.Image : UTType.Movie;
+#pragma warning restore CA1422
 
             if (!UIImagePickerController.IsSourceTypeAvailable(sourceType))
                 throw new FeatureNotSupportedException();

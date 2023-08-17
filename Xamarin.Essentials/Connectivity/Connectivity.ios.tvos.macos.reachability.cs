@@ -155,7 +155,9 @@ namespace Xamarin.Essentials
             remoteHostReachability.Schedule(CFRunLoop.Main, CFRunLoop.ModeDefault);
 
 #if __IOS__
+#pragma warning disable CA1416
             Connectivity.CellularData.RestrictionDidUpdateNotifier = new Action<CTCellularDataRestrictedState>(OnRestrictedStateChanged);
+#pragma warning restore CA1416
 #endif
         }
 
@@ -171,7 +173,9 @@ namespace Xamarin.Essentials
             remoteHostReachability = null;
 
 #if __IOS__
+#pragma warning disable CA1416
             Connectivity.CellularData.RestrictionDidUpdateNotifier = null;
+#pragma warning restore CA1416
 #endif
         }
 

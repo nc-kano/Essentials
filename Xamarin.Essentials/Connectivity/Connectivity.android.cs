@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using Android.Content;
 using Android.Net;
@@ -8,6 +9,7 @@ using Debug = System.Diagnostics.Debug;
 
 namespace Xamarin.Essentials
 {
+    [SuppressMessage("Interoperability", "CA1422:Validate platform compatibility", Justification = "Interoperability")]
     public partial class Connectivity
     {
         static ConnectivityBroadcastReceiver conectivityReceiver;

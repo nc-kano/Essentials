@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using Contacts;
 using CoreLocation;
@@ -8,6 +9,7 @@ using MapKit;
 
 namespace Xamarin.Essentials
 {
+    [SuppressMessage("Interoperability", "CA1416:Walidacja zgodności z platformą", Justification = "Interoperability")]
     public static partial class Map
     {
         internal static Task PlatformOpenMapsAsync(double latitude, double longitude, MapLaunchOptions options)
@@ -70,7 +72,9 @@ namespace Xamarin.Essentials
             try
             {
                 // we need to await to keep the geocoder alive until after the async
+#pragma warning disable CA1422
                 return await geocoder.GeocodeAddressAsync(address);
+#pragma warning restore CA1422
             }
             catch
             {

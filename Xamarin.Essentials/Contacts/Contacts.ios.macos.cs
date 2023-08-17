@@ -129,17 +129,23 @@ namespace Xamarin.Essentials
             public override void ContactPickerDidCancel(CNContactPickerViewController picker)
             {
                 DidSelectContactHandler?.Invoke(default);
+#pragma warning disable CA1422
                 picker.DismissModalViewController(true);
+#pragma warning restore CA1422
             }
 
             public override void DidSelectContact(CNContactPickerViewController picker, CNContact contact)
             {
                 DidSelectContactHandler?.Invoke(contact);
+#pragma warning disable CA1422
                 picker.DismissModalViewController(true);
+#pragma warning restore CA1422
             }
 
             public override void DidSelectContactProperty(CNContactPickerViewController picker, CNContactProperty contactProperty) =>
+#pragma warning disable CA1422
                 picker.DismissModalViewController(true);
+#pragma warning restore CA1422
         }
 #endif
     }

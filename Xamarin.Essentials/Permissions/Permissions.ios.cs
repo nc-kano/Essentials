@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using AddressBook;
 using AVFoundation;
@@ -9,6 +10,7 @@ using Speech;
 
 namespace Xamarin.Essentials
 {
+    [SuppressMessage("Interoperability", "CA1416:Walidacja zgodności z platformą", Justification = "Interoperability")]
     public static partial class Permissions
     {
         internal static partial class AVPermissions
@@ -93,7 +95,11 @@ namespace Xamarin.Essentials
 
             internal static PermissionStatus GetAddressBookPermissionStatus()
             {
+#pragma warning disable CA1416
+#pragma warning disable BI1234
                 var status = ABAddressBook.GetAuthorizationStatus();
+#pragma warning restore BI1234
+#pragma warning restore CA1416
                 return status switch
                 {
                     ABAuthorizationStatus.Authorized => PermissionStatus.Granted,
@@ -105,7 +111,9 @@ namespace Xamarin.Essentials
 
             internal static Task<PermissionStatus> RequestAddressBookPermission()
             {
+#pragma warning disable BI1234
                 var addressBook = ABAddressBook.Create(out var createError);
+#pragma warning restore BI1234
 
                 // if the permission was denied, then we can't create the object
                 if (createError?.Code == (int)ABAddressBookError.OperationNotPermittedByUserError)

@@ -1,8 +1,10 @@
-﻿using Foundation;
+﻿using System.Diagnostics.CodeAnalysis;
+using Foundation;
 using UIKit;
 
 namespace Xamarin.Essentials
 {
+    [SuppressMessage("Interoperability", "CA1416:Walidacja zgodności z platformą", Justification = "Interoperability")]
     public static partial class DeviceDisplay
     {
         static NSObject observer;
@@ -30,7 +32,9 @@ namespace Xamarin.Essentials
         static void StartScreenMetricsListeners()
         {
             var notificationCenter = NSNotificationCenter.DefaultCenter;
+#pragma warning disable CA1422
             var notification = UIApplication.DidChangeStatusBarOrientationNotification;
+#pragma warning restore CA1422
             observer = notificationCenter.AddObserver(notification, OnScreenMetricsChanged);
         }
 
@@ -48,7 +52,9 @@ namespace Xamarin.Essentials
 
         static DisplayOrientation CalculateOrientation()
         {
+#pragma warning disable CA1422
             var orientation = UIApplication.SharedApplication.StatusBarOrientation;
+#pragma warning restore CA1422
 
             if (orientation.IsLandscape())
                 return DisplayOrientation.Landscape;
@@ -58,7 +64,9 @@ namespace Xamarin.Essentials
 
         static DisplayRotation CalculateRotation()
         {
+#pragma warning disable CA1422
             var orientation = UIApplication.SharedApplication.StatusBarOrientation;
+#pragma warning restore CA1422
 
             switch (orientation)
             {
